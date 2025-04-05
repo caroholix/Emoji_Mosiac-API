@@ -44,6 +44,8 @@ RUN go mod tidy
 # Build your server.go file
 RUN go build server.go
 
+RUN chmod +x src/main/main
+
 # Expose the server port
 EXPOSE 8080
 
