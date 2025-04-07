@@ -40,7 +40,11 @@ func processImage(w http.ResponseWriter, r *http.Request) {
 	defer outFile.Close()
 	io.Copy(outFile, file)
 
-	cmd := exec.Command("./main", "video", "4", "input_images/")
+	cmd := exec.Command("sh", "-c", `
+  Xvfb :99 -screen 0 1024x768x24 & 
+  export DISPLAY=:99 && 
+  ./main video 4 input_images/
+`)
 cmd.Dir = "src/main" // This sets the working directory
 
 
